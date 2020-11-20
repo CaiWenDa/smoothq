@@ -18,7 +18,7 @@ int smoothq_vec() {
 	current_time = time(NULL);
 	current_time_cpu = get_cpu_time();
 	// Generate hash table for candidates
-	vector<Signature_inter> htable = generate_table_vec(ht);
+	vector<Signature_inter> htable = generate_table_vec(ht); // filter : P4 Algorithm 2 : 13 - 15
 	time_generate_table_cpu=get_cpu_time()-current_time_cpu;
     time_generate_table=time(NULL)-current_time;
 

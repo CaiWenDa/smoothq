@@ -11,7 +11,7 @@
 template <class InIt, class OutIt, class size_type>
 void window(InIt b, InIt e, OutIt d, size_type len) {
     for (auto s = std::next(b, len); s != e; ++s, ++b, ++d)
-        *d = { b, s };
+        *d = { b, s }; // *d = string(left:b, right:s)
 }
 
 std::vector<std::string> generate_qgram(std::string const &in, size_t q) {
@@ -29,13 +29,15 @@ inline std::string embedstr(std::string& input, int **p, std::vector<int>& hash_
     for (int j = 0; partdigit < hash_lsh.size(); ++j)
     {
         char s = i < input.size() ? input[i] : 'N';
-        //only record the bits used in LSH
-        while (j == hash_lsh[partdigit])
+        // in essay page 2, 2.1:The CGK-Embedding
+        // only record the bits used in LSH
+        while (j == hash_lsh[partdigit]) // while -> if
         {
             output += s;
             partdigit += 1;
         }
-        i = i + *(p[dict[s]] + j);
+        i = i + *(p[dict[s]] + j); // flip a coin.
+        // this function can be regarded as a random walk on strings.
     }
     return output;
 }
